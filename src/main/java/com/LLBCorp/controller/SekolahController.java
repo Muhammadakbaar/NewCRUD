@@ -34,9 +34,10 @@ public class SekolahController {
         return sekolahRepository.findAll();
     }
 
-    @PostMapping("/tambah")
-    public @ResponseBody Sekolah addNewSekolah(@RequestBody Sekolah sekolah){
-        return sekolahRepository.save(sekolah);
+    @GetMapping("/data/{id}")
+    public @ResponseBody Sekolah getByNomorSekolah(@PathVariable("id") Long nomor_sekolah){
+        return sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
+
     }
 
     @PostMapping("/tambah")
