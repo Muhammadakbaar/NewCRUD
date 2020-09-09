@@ -26,18 +26,18 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/sekolah")
 public class SekolahController {
 
-    // @Autowired
+    @Autowired
     public SekolahRepository sekolahRepository;
 
-    // @GetMapping("/semua")
-    // public @ResponseBody List<Sekolah> getAllSekolah() {
-    //     return sekolahRepository.findAll();
-    // }
+    @GetMapping("/semua")
+    public @ResponseBody List<Sekolah> getAllSekolah() {
+        return sekolahRepository.findAll();
+    }
 
-    // @PostMapping("/tambah")
-    // public @ResponseBody Sekolah addNewSekolah(@RequestBody Sekolah sekolah){
-    //     return sekolahRepository.save(sekolah);
-    // }
+    @PostMapping("/tambah")
+    public @ResponseBody Sekolah addNewSekolah(@RequestBody Sekolah sekolah){
+        return sekolahRepository.save(sekolah);
+    }
 
     @GetMapping("/data/{id}")
     Optional<Sekolah> sekolahByNomorSekolah(@PathVariable(value = "id") Long nomor_sekolah) {
@@ -45,10 +45,12 @@ public class SekolahController {
         return sekolahRepository.findByNomorSekolah(nomor_sekolah);
     }
 
-    // @DeleteMapping("/hapus/{id}")
-    // public void deleteSekolah(@PathVariable Long nomor_sekolah){
-    //     sekolahRepository.deleteByNomorSekolah(nomor_sekolah);
-    // }
+    @DeleteMapping("/hapus/{id}")
+    public String deleteSekolah(@PathVariable("id") Long nomor_sekolah){
+        Sekolah sekolah = sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
+        sekolahRepository.delete(sekolah);
+        return "mantap";
+    }
 
     // @PutMapping("/edit/{id}")
     // Sekolah updateSekolah(@RequestBody Sekolah newSekolah, @PathVariable Long nomor_sekolah){
@@ -63,10 +65,10 @@ public class SekolahController {
     //     });
     // }
 
-    // @PutMapping("/edit/{id}")
-    // public Sekolah update(@PathVariable("id") Long nomor_sekolah, @RequestBody Sekolah newSekolah) {
-    //     Sekolah sekolah = this.sekolahRepository.findByNomorSekolah(nomor_sekolah);
-    //     sekolah.setNamaSekolah(newSekolah.getNamaSekolah());
-    //   return this.sekolahRepository.save(sekolah);
-    // }
+    @PutMapping("/edit/{id}")
+    public Sekolah update(@PathVariable("id") Long nomor_sekolah, @RequestBody Sekolah newSekolah) {
+        Sekolah sekolah = sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
+        sekolah.setNamaSekolah(newSekolah.getNamaSekolah());
+      return sekolahRepository.save(sekolah);
+    }
 }

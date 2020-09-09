@@ -13,21 +13,21 @@ public class Sekolah {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long nomor_sekolah;
+    private Long nomorSekolah;
 
-    private String nama_sekolah;
+    private String namaSekolah;
 
     public Long getNomorSekolah() {
-        return nomor_sekolah;
+        return nomorSekolah;
     }
-    public void setNomorSekolah(Long nomor_sekolah){
-        this.nomor_sekolah = nomor_sekolah;
+    public void setNomorSekolah(Long nomorSekolah){
+        this.nomorSekolah = nomorSekolah;
     }
 
     public String getNamaSekolah() {
-        return nama_sekolah;
+        return namaSekolah;
     }
-    public void setNamaSekolah(String nama_sekolah){
-        this.nama_sekolah = nama_sekolah;
+    public void setNamaSekolah(String namaSekolah){
+        this.namaSekolah = namaSekolah;
     }
 }
