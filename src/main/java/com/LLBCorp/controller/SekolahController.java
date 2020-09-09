@@ -39,10 +39,9 @@ public class SekolahController {
         return sekolahRepository.save(sekolah);
     }
 
-    @GetMapping("/data/{id}")
-    Optional<Sekolah> sekolahByNomorSekolah(@PathVariable(value = "id") Long nomor_sekolah) {
-        // return sekolahRepository.findByNomorSekolah(nomor_sekolah).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return sekolahRepository.findByNomorSekolah(nomor_sekolah);
+    @PostMapping("/tambah")
+    public @ResponseBody Sekolah addNewSekolah(@RequestBody Sekolah sekolah){
+        return sekolahRepository.save(sekolah);
     }
 
     @DeleteMapping("/hapus/{id}")
