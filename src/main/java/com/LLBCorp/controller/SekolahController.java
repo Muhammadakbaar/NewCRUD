@@ -30,8 +30,14 @@ public class SekolahController {
     public SekolahRepository sekolahRepository;
 
     @GetMapping("/semua")
-    public @ResponseBody Iterable<Sekolah> getAllSekolah() {
+    public @ResponseBody List<Sekolah> getAllSekolah() {
         return sekolahRepository.findAll();
+    }
+
+    @GetMapping("/data/{id}")
+    public @ResponseBody Sekolah getByNomorSekolah(@PathVariable("id") Long nomor_sekolah){
+        return sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
+
     }
 
     @PostMapping("/tambah")
@@ -39,34 +45,17 @@ public class SekolahController {
         return sekolahRepository.save(sekolah);
     }
 
-    // @GetMapping("/data/{id}")
-    // Optional<Sekolah> sekolahByNomorSekolah(@PathVariable(value = "id") Long nomor_sekolah) {
-    //     // return sekolahRepository.findByNomorSekolah(nomor_sekolah).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    //     return sekolahRepository.findByNomorSekolah(nomor_sekolah);
-    // }
+    @DeleteMapping("/hapus/{id}")
+    public String deleteSekolah(@PathVariable("id") Long nomor_sekolah){
+        Sekolah sekolah = sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
+        sekolahRepository.delete(sekolah);
+        return "mantap";
+    }
 
-    // @DeleteMapping("/hapus/{id}")
-    // public void deleteSekolah(@PathVariable Long nomor_sekolah){
-    //     sekolahRepository.deleteByNomorSekolah(nomor_sekolah);
-    // }
-
-    // @PutMapping("/edit/{id}")
-    // Sekolah updateSekolah(@RequestBody Sekolah newSekolah, @PathVariable Long nomor_sekolah){
-    //     return sekolahRepository.findByNomorSekolah(nomor_sekolah)
-    //     .map(sekolah ->{
-    //         sekolah.setNomorSekolah(newSekolah.getNomorSekolah());
-    //         sekolah.setNamaSekolah(newSekolah.getNamaSekolah());
-    //         return sekolahRepository.save(sekolah);
-    //     }).orElseGet(() -> {
-    //         newSekolah.setNomorSekolah(nomor_sekolah);
-    //         return sekolahRepository.save(newSekolah);
-    //     });
-    // }
-
-    // @PutMapping("/edit/{id}")
-    // public Sekolah update(@PathVariable("id") Long nomor_sekolah, @RequestBody Sekolah newSekolah) {
-    //     Sekolah sekolah = this.sekolahRepository.findByNomorSekolah(nomor_sekolah);
-    //     sekolah.setNamaSekolah(newSekolah.getNamaSekolah());
-    //   return this.sekolahRepository.save(sekolah);
-    // }
-}
+    @PutMapping("/edit/{id}")
+    public Sekolah update(@PathVariable("id") Long nomor_sekolah, @RequestBody Sekolah newSekolah) {
+        Sekolah sekolah = sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
+        sekolah.setNamaSekolah(newSekolah.getNamaSekolah());
+      return sekolahRepository.save(sekolah);
+    }
+} 

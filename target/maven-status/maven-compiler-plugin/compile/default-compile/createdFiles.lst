@@ -1,7 +1,5 @@
-com/LLBCorp/repository/SekolahRepository.class
 com/LLBCorp/repository/UserRepository.class
 com/LLBCorp/model/Sekolah.class
-com/LLBCorp/controller/SekolahController.class
 com/LLBCorp/model/User.class
 com/LLBCorp/controller/MainController.class
 com/LLBCorp/Application.class
