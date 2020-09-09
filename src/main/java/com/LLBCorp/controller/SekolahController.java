@@ -26,24 +26,24 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/sekolah")
 public class SekolahController {
 
-    // @Autowired
+    @Autowired
     public SekolahRepository sekolahRepository;
 
-    // @GetMapping("/semua")
-    // public @ResponseBody List<Sekolah> getAllSekolah() {
-    //     return sekolahRepository.findAll();
-    // }
-
-    // @PostMapping("/tambah")
-    // public @ResponseBody Sekolah addNewSekolah(@RequestBody Sekolah sekolah){
-    //     return sekolahRepository.save(sekolah);
-    // }
-
-    @GetMapping("/data/{id}")
-    Optional<Sekolah> sekolahByNomorSekolah(@PathVariable(value = "id") Long nomor_sekolah) {
-        // return sekolahRepository.findByNomorSekolah(nomor_sekolah).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return sekolahRepository.findByNomorSekolah(nomor_sekolah);
+    @GetMapping("/semua")
+    public @ResponseBody Iterable<Sekolah> getAllSekolah() {
+        return sekolahRepository.findAll();
     }
+
+    @PostMapping("/tambah")
+    public @ResponseBody Sekolah addNewSekolah(@RequestBody Sekolah sekolah){
+        return sekolahRepository.save(sekolah);
+    }
+
+    // @GetMapping("/data/{id}")
+    // Optional<Sekolah> sekolahByNomorSekolah(@PathVariable(value = "id") Long nomor_sekolah) {
+    //     // return sekolahRepository.findByNomorSekolah(nomor_sekolah).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    //     return sekolahRepository.findByNomorSekolah(nomor_sekolah);
+    // }
 
     // @DeleteMapping("/hapus/{id}")
     // public void deleteSekolah(@PathVariable Long nomor_sekolah){
