@@ -29,30 +29,30 @@ public class SekolahController {
     @Autowired
     public SekolahRepository sekolahRepository;
 
-    @GetMapping("/semua")
+    @GetMapping("/")
     public @ResponseBody List<Sekolah> getAllSekolah() {
         return sekolahRepository.findAll();
     }
 
-    @GetMapping("/data/{id}")
+    @GetMapping("/{id}")
     public @ResponseBody Sekolah getByNomorSekolah(@PathVariable("id") Long nomor_sekolah){
         return sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
 
     }
 
-    @PostMapping("/tambah")
+    @PostMapping("/")
     public @ResponseBody Sekolah addNewSekolah(@RequestBody Sekolah sekolah){
         return sekolahRepository.save(sekolah);
     }
 
-    @DeleteMapping("/hapus/{id}")
+    @DeleteMapping("/{id}")
     public String deleteSekolah(@PathVariable("id") Long nomor_sekolah){
         Sekolah sekolah = sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
         sekolahRepository.delete(sekolah);
-        return "mantap";
+        return "Terhapus";
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Sekolah update(@PathVariable("id") Long nomor_sekolah, @RequestBody Sekolah newSekolah) {
         Sekolah sekolah = sekolahRepository.findByNomorSekolah(nomor_sekolah).get();
         sekolah.setNamaSekolah(newSekolah.getNamaSekolah());
